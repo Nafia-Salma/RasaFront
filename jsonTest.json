@@ -6,15 +6,15 @@
         "button": [
             {
                 "title": "Send",
-                "payload": ""
+                "payload": "Send"
             },
             {
                 "title": "Restart",
-                "payload": ""
+                "payload": "Restart"
             },
             {
                 "title": "Delete",
-                "payload": ""
+                "payload": "Delete"
             }
         ]
     }
