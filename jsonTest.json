@@ -1,0 +1,21 @@
+[
+    {
+        "recipient_id": "default",
+        "text": "Hey! How may I assist you with your computer needs?",
+        "image": "https://cdn-icons-png.flaticon.com/512/4944/4944377.png",
+        "button": [
+            {
+                "title": "Send",
+                "payload": ""
+            },
+            {
+                "title": "Restart",
+                "payload": ""
+            },
+            {
+                "title": "Delete",
+                "payload": ""
+            }
+        ]
+    }
+]
