@@ -31,7 +31,9 @@ import com.example.rasachatbotapp.destinations.OpenUrlDestination
 import com.example.rasachatbotapp.network.Carousel
 import com.example.rasachatbotapp.network.Message
 import com.example.rasachatbotapp.network.RasaButton
+import com.example.rasachatbotapp.network.bodyRequest
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import okhttp3.RequestBody
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,8 +41,8 @@ val message = mutableStateOf("")
 
 val openUrl = mutableStateOf(false)
 
-private val BotChatBubbleShape = RoundedCornerShape(0.dp, 8.dp, 8.dp, 8.dp)
-private val AuthorChatBubbleShape = RoundedCornerShape(8.dp, 0.dp, 8.dp, 8.dp)
+private val BotChatBubbleShape = RoundedCornerShape(0.dp, 10.dp, 10.dp, 10.dp)
+private val AuthorChatBubbleShape = RoundedCornerShape(10.dp, 0.dp, 10.dp, 10.dp)
 
 @Composable
 fun TopBarSection(
@@ -164,7 +166,7 @@ fun MessageItem(
                 Box(
                     modifier = Modifier
                         .background(
-                            if (isOut) MaterialTheme.colors.primary else Color(0xFF616161),
+                            if (isOut) MaterialTheme.colors.primary else Color(0xFFFAFAFA),
                             shape = if (isOut) AuthorChatBubbleShape else BotChatBubbleShape
                         )
                         .padding(
@@ -177,7 +179,7 @@ fun MessageItem(
 
                     Text(
                         text = messageText,
-                        color = Color.White
+//                        color = Color.White
                     )
                 }
 
@@ -187,7 +189,7 @@ fun MessageItem(
             if (image.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Surface(
-                    color = if (isOut) MaterialTheme.colors.primary else Color(0xFF616161),
+                    color = if (isOut) MaterialTheme.colors.primary else Color(0xFFFAFAFA),
                     shape = if (isOut) AuthorChatBubbleShape else BotChatBubbleShape
                 ) {
                     Image(
@@ -241,7 +243,8 @@ fun ShowButtons(
                             recipient_id = viewModel.username,
                             time = Calendar.getInstance().time,
                             isOut = true
-                        )
+                        ),
+                        bodyRequest(button.payload)
                     )
                 },
                 modifier = Modifier.clip(RoundedCornerShape(20.dp))
@@ -267,7 +270,11 @@ fun ShowCarousels(
         modifier = Modifier.fillMaxWidth()
     ) {
         items(carousels) { carousel ->
-            CarouselItem(single_carousel = carousel, viewModel = viewModel, navigator = navigator)
+            CarouselItem(
+                single_carousel = carousel,
+                viewModel = viewModel,
+                navigator = navigator
+            )
             Spacer(modifier = Modifier.width(8.dp))
         }
 
@@ -325,7 +332,8 @@ fun CarouselItem(
                             recipient_id = viewModel.username,
                             time = Calendar.getInstance().time,
                             isOut = true
-                        )
+                        ),
+                        bodyRequest(single_carousel.button.payload)
                     )
                 },
                 modifier = Modifier.width(200.dp)

@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.rasachatbotapp.network.Message
+import com.example.rasachatbotapp.network.bodyRequest
 import com.example.rasachatbotapp.ui.theme.RasaChatbotAppTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
@@ -54,8 +55,8 @@ fun MainScreen(navigator: DestinationsNavigator) {
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         TopBarSection(
-            username = "Bot",
-            profile = painterResource(id = R.drawable.gojo),
+            username = "RasaBot",
+            profile = painterResource(id = R.drawable.bot),
             isOnline = viewModel._connectivityState.value,
             navigator = navigator
         )
@@ -98,7 +99,8 @@ fun MessageSection(
                                     recipient_id = viewModel.username,
                                     time = Calendar.getInstance().time,
                                     isOut = true
-                                )
+                                ),
+                                bodyRequest(message.value)
                             )
                         } else {
                             Toast.makeText(
